@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Monware Clinical</string>
+
+    <!-- LOGIN  -->
+    <string name="login">Iniciar Sesión</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="sign_up_me">Registrarme</string>
+
+</resources>
