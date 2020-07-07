@@ -6,4 +6,19 @@
     <string name="forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="sign_up_me">Registrarme</string>
 
+    <!-- FORGOTTEN PASSWORD  -->
+    <string name="send_email">Enviar correo</string>
+
+    <!-- SIGN UP -->
+    <string name="sign_up">Registrarme</string>
+    <string name="username">Usuario</string>
+    <string name="first_name">Nombres</string>
+    <string name="last_name">Apellidos</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repetir contraseña</string>
+
+    <!-- MENU -->
+    <string name="menu_home">Inicio</string>
+    <string name="menu_search">Buscar</string>
 </resources>
