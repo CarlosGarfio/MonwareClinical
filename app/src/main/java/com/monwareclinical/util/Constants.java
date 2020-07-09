@@ -50,7 +50,7 @@ public class Constants {
         ));
 
         myEvents.add(new Event(
-                "Gameing",
+                "Gaming",
                 "19/07/2020 22:00",
                 places.get(1)
         ));
