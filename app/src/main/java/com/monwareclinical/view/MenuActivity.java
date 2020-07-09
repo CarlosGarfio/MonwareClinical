@@ -65,6 +65,10 @@ public class MenuActivity extends AppCompatActivity {
                     txtTitle.setText(getString(R.string.menu_search));
                     fragment = new SearchFragment();
                     break;
+                    case R.id.navigation_settings:
+                    txtTitle.setText(getString(R.string.menu_settings));
+                    fragment = new SearchFragment();
+                    break;
             }
 
             return loadFragment(fragment);

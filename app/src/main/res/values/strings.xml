@@ -21,4 +21,5 @@
     <!-- MENU -->
     <string name="menu_home">Inicio</string>
     <string name="menu_search">Buscar</string>
+    <string name="menu_settings">Ajustes</string>
 </resources>
