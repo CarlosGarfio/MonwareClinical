@@ -1,5 +1,6 @@
 package com.monwareclinical.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -8,17 +9,33 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.monwareclinical.R;
+import com.monwareclinical.dialogs.LoadingDialog;
 
 public class LoginActivity extends AppCompatActivity implements
         View.OnClickListener {
 
+    public static final int EXTRA_SIGN_UP = 1;
+
     Activity fa;
 
+    LoadingDialog loadingDialog;
+
+    FirebaseAuth mAuth;
+
+    TextInputLayout tilEtEmail;
+    TextInputLayout tilEtPassword;
     Button btnLogin;
     Button btnSignUpMe;
     TextView btnForgottenPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +49,9 @@ public class LoginActivity extends AppCompatActivity implements
 
     void initComps() {
         fa = this;
+        mAuth = FirebaseAuth.getInstance();
+        tilEtEmail = findViewById(R.id.tilEtEmail);
+        tilEtPassword = findViewById(R.id.tilEtPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUpMe = findViewById(R.id.btnSignUpMe);
         btnForgottenPassword = findViewById(R.id.forgottenPassword);
@@ -44,17 +64,53 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     void initStuff() {
+        loadingDialog = new LoadingDialog(fa);
+        tilEtEmail.getEditText().setText("gmcarlosd@hotmail.com");
+        tilEtPassword.getEditText().setText("Aderevab1!");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if (requestCode == EXTRA_SIGN_UP) {
+            String txtEmail = data.getStringExtra(SignUpActivity.EXTRA_EMAIL);
+            String txtPassword = data.getStringExtra(SignUpActivity.EXTRA_PASSWORD);
+
+            tilEtEmail.getEditText().setText(txtEmail);
+            tilEtPassword.getEditText().setText(txtPassword);
+        }
+    }
+
+    void login() {
+        String txtEmail = tilEtEmail.getEditText().getText().toString();
+        String txtPassword = tilEtPassword.getEditText().getText().toString();
+
+        mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(fa, task -> {
+            if (task.isSuccessful()) {
+                loadingDialog.dismissDialog();
+                startActivity(new Intent(fa, MenuActivity.class));
+                finish();
+                fa.overridePendingTransition(R.anim.fade_out, R.anim.fade_out);
+            } else {
+                loadingDialog.dismissDialog();
+                Toast.makeText(fa, "El correo o la contraseña son incorrectos", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
-                startActivity(new Intent(fa, MenuActivity.class));
-                finish();
+                loadingDialog.showDialog();
+                loadingDialog.setText("Iniciando sesión...");
+                login();
+
                 break;
             case R.id.btnSignUpMe:
-                startActivity(new Intent(fa, SignUpActivity.class));
+                Intent intent = new Intent(fa, SignUpActivity.class);
+                startActivityForResult(intent, EXTRA_SIGN_UP);
                 break;
             case R.id.forgottenPassword:
                 startActivity(new Intent(fa, ForgottenPasswordActivity.class));

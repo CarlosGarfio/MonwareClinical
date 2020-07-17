@@ -15,6 +15,7 @@
     <string name="first_name">Nombres</string>
     <string name="last_name">Apellidos</string>
     <string name="email">Email</string>
+    <string name="phone_number">Teléfono</string>
     <string name="password">Contraseña</string>
     <string name="repeat_password">Repetir contraseña</string>
 
@@ -22,4 +23,15 @@
     <string name="menu_home">Inicio</string>
     <string name="menu_search">Buscar</string>
     <string name="menu_settings">Ajustes</string>
+
+    <!-- FIREBASE -->
+    <string name="fb_table_users">users</string>
+    <string name="fb_field_username">username</string>
+    <string name="fb_auth_failed">Error al autenticar</string>
+    <string name="fb_auth_success">Autenticación exitosa</string>
+    <string name="fb_auth_try_again">Intenta nuevamente</string>
+
+    <!-- EDIT PROFILE -->
+    <string name="save">guardar</string>
+
 </resources>

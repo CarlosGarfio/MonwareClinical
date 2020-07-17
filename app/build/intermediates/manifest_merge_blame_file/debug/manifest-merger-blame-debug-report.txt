@@ -1,0 +1,159 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.monwareclinical"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.CALL_PHONE" />
+11-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:5:5-69
+11-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:5:22-66
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:6:5-79
+12-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:7:5-67
+13-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:7:22-64
+14
+15    <application
+15-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:9:5-32:19
+16        android:allowBackup="true"
+16-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:10:9-35
+17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+17-->[androidx.core:core:1.1.0] /home/code/.gradle/caches/transforms-2/files-2.1/b2b51ad2129f7ae88186ad90508b79ab/core-1.1.0/AndroidManifest.xml:24:18-86
+18        android:debuggable="true"
+19        android:extractNativeLibs="false"
+20        android:icon="@mipmap/ic_launcher"
+20-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:11:9-43
+21        android:label="@string/app_name"
+21-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:12:9-41
+22        android:roundIcon="@mipmap/ic_launcher_round"
+22-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:13:9-54
+23        android:supportsRtl="true"
+23-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:14:9-35
+24        android:testOnly="true"
+25        android:theme="@style/AppTheme"
+25-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:15:9-40
+26        android:usesCleartextTraffic="true" >
+26-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:16:9-44
+27        <activity android:name="com.monwareclinical.view.EditProfileActivity" />
+27-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:17:9-62
+27-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:17:19-59
+28        <activity android:name="com.monwareclinical.view.ProfileActivity" />
+28-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:18:9-58
+28-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:18:19-55
+29        <activity android:name="com.monwareclinical.view.MakeAppointmentActivity" />
+29-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:19:9-66
+29-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:19:19-63
+30        <activity android:name="com.monwareclinical.view.PlaceActivity" />
+30-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:20:9-56
+30-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:20:19-53
+31        <activity android:name="com.monwareclinical.view.MenuActivity" />
+31-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:21:9-55
+31-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:21:19-52
+32        <activity android:name="com.monwareclinical.view.ForgottenPasswordActivity" />
+32-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:22:9-68
+32-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:22:19-65
+33        <activity android:name="com.monwareclinical.view.SignUpActivity" />
+33-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:23:9-57
+33-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:23:19-54
+34        <activity android:name="com.monwareclinical.view.LoginActivity" />
+34-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:24:9-56
+34-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:24:19-53
+35        <activity android:name="com.monwareclinical.view.SplashScreenActivity" >
+35-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:25:9-31:20
+35-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:25:19-60
+36            <intent-filter>
+36-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:26:13-30:29
+37                <action android:name="android.intent.action.MAIN" />
+37-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:27:17-69
+37-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:27:25-66
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:29:17-77
+39-->/home/code/StudioProjects/MonwareClinical/app/src/main/AndroidManifest.xml:29:27-74
+40            </intent-filter>
+41        </activity>
+42
+43        <service
+43-->[com.google.firebase:firebase-database:19.3.1] /home/code/.gradle/caches/transforms-2/files-2.1/6ae2d636d1b0a123e40b25bf192e7a20/jetified-firebase-database-19.3.1/AndroidManifest.xml:29:9-35:19
+44            android:name="com.google.firebase.components.ComponentDiscoveryService"
+44-->[com.google.firebase:firebase-database:19.3.1] /home/code/.gradle/caches/transforms-2/files-2.1/6ae2d636d1b0a123e40b25bf192e7a20/jetified-firebase-database-19.3.1/AndroidManifest.xml:30:13-84
+45            android:directBootAware="true"
+45-->[com.google.firebase:firebase-common:19.3.0] /home/code/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:34:13-43
+46            android:exported="false" >
+46-->[com.google.firebase:firebase-database:19.3.1] /home/code/.gradle/caches/transforms-2/files-2.1/6ae2d636d1b0a123e40b25bf192e7a20/jetified-firebase-database-19.3.1/AndroidManifest.xml:31:13-37
+47            <meta-data
+47-->[com.google.firebase:firebase-database:19.3.1] /home/code/.gradle/caches/transforms-2/files-2.1/6ae2d636d1b0a123e40b25bf192e7a20/jetified-firebase-database-19.3.1/AndroidManifest.xml:32:13-34:85
+48                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+48-->[com.google.firebase:firebase-database:19.3.1] /home/code/.gradle/caches/transforms-2/files-2.1/6ae2d636d1b0a123e40b25bf192e7a20/jetified-firebase-database-19.3.1/AndroidManifest.xml:33:17-109
+49                android:value="com.google.firebase.components.ComponentRegistrar" />
+49-->[com.google.firebase:firebase-database:19.3.1] /home/code/.gradle/caches/transforms-2/files-2.1/6ae2d636d1b0a123e40b25bf192e7a20/jetified-firebase-database-19.3.1/AndroidManifest.xml:34:17-82
+50            <meta-data
+50-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:36:13-38:85
+51                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+51-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:37:17-109
+52                android:value="com.google.firebase.components.ComponentRegistrar" />
+52-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:38:17-82
+53        </service>
+54
+55        <activity
+55-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:24:9-31:50
+56            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
+56-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:25:13-85
+57            android:excludeFromRecents="true"
+57-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:26:13-46
+58            android:exported="true"
+58-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:27:13-36
+59            android:launchMode="singleTask"
+59-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:28:13-44
+60            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
+60-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:29:13-102
+61            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+61-->[com.google.firebase:firebase-auth:19.3.2] /home/code/.gradle/caches/transforms-2/files-2.1/4b6c239d10ee2845936010180a95495d/jetified-firebase-auth-19.3.2/AndroidManifest.xml:30:13-72
+62
+63        <provider
+63-->[com.google.firebase:firebase-common:19.3.0] /home/code/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:26:9-30:39
+64            android:name="com.google.firebase.provider.FirebaseInitProvider"
+64-->[com.google.firebase:firebase-common:19.3.0] /home/code/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
+65            android:authorities="com.monwareclinical.firebaseinitprovider"
+65-->[com.google.firebase:firebase-common:19.3.0] /home/code/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
+66            android:exported="false"
+66-->[com.google.firebase:firebase-common:19.3.0] /home/code/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:29:13-37
+67            android:initOrder="100" />
+67-->[com.google.firebase:firebase-common:19.3.0] /home/code/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:30:13-36
+68
+69        <activity
+69-->[com.google.android.gms:play-services-base:17.1.0] /home/code/.gradle/caches/transforms-2/files-2.1/78b13228d1b7806e4595749364e08dfc/jetified-play-services-base-17.1.0/AndroidManifest.xml:23:9-26:75
+70            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+70-->[com.google.android.gms:play-services-base:17.1.0] /home/code/.gradle/caches/transforms-2/files-2.1/78b13228d1b7806e4595749364e08dfc/jetified-play-services-base-17.1.0/AndroidManifest.xml:24:13-79
+71            android:exported="false"
+71-->[com.google.android.gms:play-services-base:17.1.0] /home/code/.gradle/caches/transforms-2/files-2.1/78b13228d1b7806e4595749364e08dfc/jetified-play-services-base-17.1.0/AndroidManifest.xml:25:13-37
+72            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+72-->[com.google.android.gms:play-services-base:17.1.0] /home/code/.gradle/caches/transforms-2/files-2.1/78b13228d1b7806e4595749364e08dfc/jetified-play-services-base-17.1.0/AndroidManifest.xml:26:13-72
+73
+74        <meta-data
+74-->[com.google.android.gms:play-services-basement:17.0.0] /home/code/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+75            android:name="com.google.android.gms.version"
+75-->[com.google.android.gms:play-services-basement:17.0.0] /home/code/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+76            android:value="@integer/google_play_services_version" />
+76-->[com.google.android.gms:play-services-basement:17.0.0] /home/code/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+77
+78        <provider
+78-->[androidx.lifecycle:lifecycle-process:2.2.0] /home/code/.gradle/caches/transforms-2/files-2.1/d8929896c297176375105c9444083cbd/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
+79            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+79-->[androidx.lifecycle:lifecycle-process:2.2.0] /home/code/.gradle/caches/transforms-2/files-2.1/d8929896c297176375105c9444083cbd/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79
+80            android:authorities="com.monwareclinical.lifecycle-process"
+80-->[androidx.lifecycle:lifecycle-process:2.2.0] /home/code/.gradle/caches/transforms-2/files-2.1/d8929896c297176375105c9444083cbd/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
+81            android:exported="false"
+81-->[androidx.lifecycle:lifecycle-process:2.2.0] /home/code/.gradle/caches/transforms-2/files-2.1/d8929896c297176375105c9444083cbd/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
+82            android:multiprocess="true" />
+82-->[androidx.lifecycle:lifecycle-process:2.2.0] /home/code/.gradle/caches/transforms-2/files-2.1/d8929896c297176375105c9444083cbd/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
+83    </application>
+84
+85</manifest>

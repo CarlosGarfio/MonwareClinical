@@ -7,9 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.monwareclinical.R;
-import com.monwareclinical.model.User;
-import com.monwareclinical.util.Constants;
+
 
 import static android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN;
 
@@ -18,7 +19,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     Activity fa;
 
-    final long MILLS = 1_000L;
+    final long MILLS = 500L;
+
+    public static final Object lock = new Object();
+    public static int loading = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +31,73 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         fa = this;
-
-        Constants.getInstance(fa).setUser(new User(
-                "https://firebasestorage.googleapis.com/v0/b/easyprint-b31e3.appspot.com/o/photos%2FgwOrD2Oo8zaLtym8Xg6YgCrqIIZ2?alt=media&token=bb142b94-12b2-4db8-b2f2-29c1e9d69d36",
-                "takenhiduk",
-                "Alma Marcela",
-                "Montez Cano",
-                "mcalmamarcela@gmail.com"));
-
-        new Handler().postDelayed(this::continueToMain, MILLS);
     }
 
-    void continueToMain() {
+    void continueToLogin() {
         startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
         finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    void continueToApp() {
+        startActivity(new Intent(SplashScreenActivity.this, MenuActivity.class));
+        finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        new Handler().postDelayed(() -> {
+            Thread t = new Thread() {
+                public void run() {
+                    synchronized (lock) {
+                        while (loading == 0)
+                            try {
+                                lock.wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                        // User has been checked and the app is now running
+
+                        switch (loading) {
+                            // User is logged
+                            case 1:
+                                continueToApp();
+                                break;
+                            // User is not logged
+                            case 2:
+                                continueToLogin();
+                                break;
+                        }
+                    }
+                }
+            };
+            t.start();
+
+           checkUser();
+
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, MILLS);
+    }
+
+    void checkUser() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            synchronized (SplashScreenActivity.lock) {
+                SplashScreenActivity.loading = 1;
+                SplashScreenActivity.lock.notify();
+            }
+        } else {
+            synchronized (SplashScreenActivity.lock) {
+                SplashScreenActivity.loading = 2;
+                SplashScreenActivity.lock.notify();
+            }
+        }
     }
 }

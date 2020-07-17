@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 import com.monwareclinical.R;
 import com.monwareclinical.adapter.MyEventAdapter;
 import com.monwareclinical.model.Event;
-import com.monwareclinical.model.Place;
 import com.monwareclinical.util.Constants;
 
 import java.util.List;
