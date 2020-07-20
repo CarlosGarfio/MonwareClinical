@@ -13,6 +13,7 @@
     <string name="sign_up">Registrarme</string>
     <string name="username">Usuario</string>
     <string name="first_name">Nombres</string>
+    <string name="full_name">Nombre completo</string>
     <string name="last_name">Apellidos</string>
     <string name="email">Email</string>
     <string name="phone_number">Teléfono</string>
@@ -27,11 +28,18 @@
     <!-- FIREBASE -->
     <string name="fb_table_users">users</string>
     <string name="fb_field_username">username</string>
+    <string name="fb_field_profile_photo">img</string>
     <string name="fb_auth_failed">Error al autenticar</string>
     <string name="fb_auth_success">Autenticación exitosa</string>
     <string name="fb_auth_try_again">Intenta nuevamente</string>
 
     <!-- EDIT PROFILE -->
     <string name="save">guardar</string>
+    <string name="old_email">Email antiguo</string>
+    <string name="new_email">Email nuevo</string>
+    <string name="old_password">Contraseña antigua</string>
+    <string name="new_password">Contraseña nueva</string>
+    <string name="repeat_new_password">Repetir contraseña nueva</string>
+
 
 </resources>

@@ -44,12 +44,7 @@ public class SetUpToolBar implements
         txtTitle.setText(title);
 
         if (imgUrl != null) {
-            Glide
-                    .with(fa)
-                    .load(imgUrl)
-                    .placeholder(R.drawable.blank_user)
-                    .into(imgProfile);
-
+            Glide.with(fa).load(imgUrl).placeholder(R.drawable.blank_user).dontAnimate().into(imgProfile);
             imgProfile.setOnClickListener(this);
         } else {
             imgProfile.setVisibility(View.GONE);

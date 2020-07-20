@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.EditProfileActivity" />
         <activity android:name=".view.ProfileActivity" />
         <activity android:name=".view.MakeAppointmentActivity" />
         <activity android:name=".view.PlaceActivity" />
@@ -25,7 +24,6 @@
         <activity android:name=".view.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
