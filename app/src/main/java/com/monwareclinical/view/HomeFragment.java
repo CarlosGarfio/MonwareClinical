@@ -33,7 +33,6 @@ public class HomeFragment extends Fragment {
     ViewPager myEventsViewPager;
     MyEventAdapter eventAdapter;
 
-    List<Event> myEvents;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -47,10 +46,8 @@ public class HomeFragment extends Fragment {
 
         myEventsViewPager = root.findViewById(R.id.viewPagerMyEvents);
 
-        myEvents = Constants.getInstance(context).getMyEvents();
-
-        eventAdapter = new MyEventAdapter(myEvents, context);
-        myEventsViewPager.setAdapter(eventAdapter);
+//        eventAdapter = new MyEventAdapter(null, context);
+//        myEventsViewPager.setAdapter(eventAdapter);
 
         CircleImageView imgProfile = root.findViewById(R.id.imgProfile);
 

@@ -28,12 +28,12 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-storage:19.1.1'
     def circular_image_view_version = '3.1.0'
     def ah_bottom_navigation_version = '2.3.4'
     def slide_to_act_version = '0.8.0'
     def firebase_database_version = '19.3.1'
     def firebase_auth_version = '19.3.2'
+    def firebase_storage_version = '19.1.1'
     def glide_version = '4.11.0'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -61,6 +61,9 @@ dependencies {
 
     // Firebase Auth
     implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
+
+    // Firebase Storage
+    implementation "com.google.firebase:firebase-storage:$firebase_storage_version"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"

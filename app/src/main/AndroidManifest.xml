@@ -16,7 +16,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".view.ProfileActivity" />
         <activity android:name=".view.MakeAppointmentActivity" />
-        <activity android:name=".view.PlaceActivity" />
         <activity android:name=".view.MenuActivity" />
         <activity android:name=".view.ForgottenPasswordActivity" />
         <activity android:name=".view.SignUpActivity" />

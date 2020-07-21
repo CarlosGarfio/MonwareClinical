@@ -12,12 +12,12 @@
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/layout/activity_login.xml"
     },
     {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_close.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_close.xml"
-    },
-    {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_rounded_phone_button.xml.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/rounded_phone_button.xml"
+    },
+    {
+        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_close.xml.flat",
+        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_close.xml"
     },
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/layout_change_email_dialog.xml.flat",
@@ -36,10 +36,6 @@
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/layout/change_password_dialog.xml"
     },
     {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_bg_round_topright_bottomleft.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/bg_round_topright_bottomleft.xml"
-    },
-    {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/anim_fade_out.xml.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/anim/fade_out.xml"
     },
@@ -52,16 +48,12 @@
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/rounded_button.xml"
     },
     {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_ellipses.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_ellipses.xml"
+        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_building.xml.flat",
+        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_building.xml"
     },
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_white_grey_border_bottom.xml.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/white_grey_border_bottom.xml"
-    },
-    {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_back_arrow.png.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/back_arrow.png"
     },
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_back_arrow.xml.flat",
@@ -78,10 +70,6 @@
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/font_poppins.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/font/poppins.xml"
     },
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/layout_home_fragment.xml.flat",
@@ -108,16 +96,8 @@
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/anim/fade_in.xml"
     },
     {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/layout_search_fragment.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/layout/search_fragment.xml"
-    },
-    {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_lock.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_lock.xml"
     },
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable-v24_ic_launcher_foreground.xml.flat",
@@ -132,12 +112,12 @@
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_search.xml"
     },
     {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_bottom_nav_topshadow.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/bottom_nav_topshadow.xml"
-    },
-    {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_forgotten_password.png.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/forgotten_password.png"
+    },
+    {
+        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/layout_clinic_fragment.xml.flat",
+        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/layout/clinic_fragment.xml"
     },
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_phone.xml.flat",
@@ -178,10 +158,6 @@
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_home.xml.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_home.xml"
-    },
-    {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_edit.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_edit.xml"
     },
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_more.xml.flat",
@@ -268,19 +244,15 @@
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/layout/item_place.xml"
     },
     {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_username.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_username.xml"
-    },
-    {
-        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_toolbar_dropshadow.xml.flat",
-        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/toolbar_dropshadow.xml"
-    },
-    {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/font_poppins_light.otf.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/font/poppins_light.otf"
     },
     {
         "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_rounded_white_edittext.xml.flat",
         "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/rounded_white_edittext.xml"
+    },
+    {
+        "merged": "/home/code/StudioProjects/MonwareClinical/app/build/intermediates/res/merged/debug/drawable_ic_medicines.xml.flat",
+        "source": "/home/code/StudioProjects/MonwareClinical/app/src/main/res/drawable/ic_medicines.xml"
     }
 ]

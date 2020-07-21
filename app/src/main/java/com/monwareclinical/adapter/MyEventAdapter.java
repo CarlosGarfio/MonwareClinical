@@ -16,8 +16,6 @@ import com.monwareclinical.model.Event;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MyEventAdapter extends PagerAdapter {
 
     List<Event> events;

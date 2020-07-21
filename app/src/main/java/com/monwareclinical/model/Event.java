@@ -4,9 +4,9 @@ public class Event {
 
     String title;
     String date;
-    Place place;
+    Clinic place;
 
-    public Event(String title, String date, Place place) {
+    public Event(String title, String date, Clinic place) {
         this.title = title;
         this.date = date;
         this.place = place;
@@ -20,7 +20,7 @@ public class Event {
         return date;
     }
 
-    public Place getPlace() {
+    public Clinic getPlace() {
         return place;
     }
 

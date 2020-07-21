@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // check if the request code is same as what is passed  here it is 2
         if (requestCode == EXTRA_SIGN_UP) {
             String txtEmail = data.getStringExtra(SignUpActivity.EXTRA_EMAIL);
             String txtPassword = data.getStringExtra(SignUpActivity.EXTRA_PASSWORD);
@@ -106,7 +105,6 @@ public class LoginActivity extends AppCompatActivity implements
                 loadingDialog.showDialog();
                 loadingDialog.setText("Iniciando sesión...");
                 login();
-
                 break;
             case R.id.btnSignUpMe:
                 Intent intent = new Intent(fa, SignUpActivity.class);

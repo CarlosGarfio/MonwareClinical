@@ -33,7 +33,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     void initComps() {
-        fa=this;
+        fa = this;
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
     }
@@ -63,16 +63,16 @@ public class MenuActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     toolBar.setTitle(getString(R.string.menu_home));
-                    fragment = new HomeFragment();
+                    fragment = HomeFragment.newInstance();
                     break;
 
-                case R.id.navigation_search:
-                    toolBar.setTitle(getString(R.string.menu_search));
-                    fragment = new SearchFragment();
+                case R.id.navigation_clinic:
+                    toolBar.setTitle(getString(R.string.menu_building));
+                    fragment = ClinicFragment.newInstance();
                     break;
-                case R.id.navigation_settings:
-                    toolBar.setTitle(getString(R.string.menu_settings));
-                    fragment = new SearchFragment();
+                case R.id.navigation_medicines:
+                    toolBar.setTitle(getString(R.string.menu_medicines));
+                    fragment = ClinicFragment.newInstance();
                     break;
             }
 

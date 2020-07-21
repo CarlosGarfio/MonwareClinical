@@ -30,7 +30,7 @@ public class ChangeNameDialog {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.change_email_dialog, null);
+        View view = inflater.inflate(R.layout.change_name_dialog, null);
 
         builder
                 .setView(view)
