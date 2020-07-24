@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.annotations.NotNull;
 import com.monwareclinical.R;
 import com.monwareclinical.view.ProfileActivity;
 
@@ -51,8 +52,12 @@ public class SetUpToolBar implements
         }
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NotNull String title) {
         this.txtTitle.setText(title);
+    }
+
+    public void reloadPhoto(@NotNull Uri imgUrl) {
+        Glide.with(fa).load(imgUrl).placeholder(R.drawable.blank_user).dontAnimate().into(imgProfile);
     }
 
     @Override

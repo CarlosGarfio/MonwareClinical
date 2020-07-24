@@ -44,14 +44,8 @@ public class MyEventAdapter extends PagerAdapter {
         layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.item_my_event, container, false);
 
-        ImageView imgBanner;
-        TextView txtTitle;
-        TextView txtDescription;
-
-        imgBanner = view.findViewById(R.id.imgBanner);
-        txtTitle = view.findViewById(R.id.txtTitle);
-        txtDescription = view.findViewById(R.id.txtDescription);
-
+        TextView txtTitle = view.findViewById(R.id.txtTitle);
+        TextView txtDescription = view.findViewById(R.id.txtDescription);
 
         txtTitle.setText(events.get(position).getTitle());
 

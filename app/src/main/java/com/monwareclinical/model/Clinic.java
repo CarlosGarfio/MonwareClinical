@@ -21,6 +21,9 @@ public class Clinic implements Serializable {
     String extNumber;
     String phoneNumber;
 
+    public Clinic() {
+    }
+
     public Clinic(String name, String description, String opensAt, String closesAt, String streetAddress, String city, String state, String extNumber, String phoneNumber) {
         this.name = name;
         this.description = description;

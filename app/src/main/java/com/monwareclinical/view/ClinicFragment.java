@@ -1,5 +1,6 @@
 package com.monwareclinical.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.monwareclinical.R;
+import com.monwareclinical.dialogs.LoadingDialog;
 import com.monwareclinical.model.Clinic;
 import com.monwareclinical.util.Constants;
 
@@ -65,14 +72,17 @@ public class ClinicFragment extends Fragment implements
 
     void initStuff() {
         clinic = Constants.getInstance(context).getClinic();
-        String description = clinic.getDescription() + "\n\n" +
-                "Dirección:\n" +
-                clinic.getStreetAddress() + " #" + clinic.getExtNumber() + "\n" +
-                clinic.getState() + ", " + clinic.getCity() + "\n\n" +
-                "Abre a las: " + clinic.getOpensAt() + "\n" +
-                "Cierra a las: " + clinic.getClosesAt();
 
-        txtDescription.setText(description);
+        if (clinic != null) {
+            String description = clinic.getDescription() + "\n\n" +
+                    "Dirección:\n" +
+                    clinic.getStreetAddress() + " #" + clinic.getExtNumber() + "\n" +
+                    clinic.getState() + ", " + clinic.getCity() + "\n\n" +
+                    "Abre a las: " + clinic.getOpensAt() + "\n" +
+                    "Cierra a las: " + clinic.getClosesAt();
+
+            txtDescription.setText(description);
+        }
     }
 
     @Override

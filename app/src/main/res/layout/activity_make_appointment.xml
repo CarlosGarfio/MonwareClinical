@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".view.MakeAppointmentActivity">
 
@@ -13,23 +13,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:padding="10dp">
 
-        <include
-            layout="@layout/item_my_event"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5" />
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
+            android:text="Asigname un título"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_title"
+            android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/rounded_white_edittext"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Titulo de recordatorio"
+            android:hint="Titulo de recordatirio"
             android:inputType="text"
             android:maxLines="1"
             android:textAlignment="center"
@@ -44,20 +49,23 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center_vertical"
-            android:text="¿Cuando sera tu cita?"
+            android:text="¿Que día sera tu cita?"
             android:textColor="@android:color/black"
             android:textSize="@dimen/txt_title"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/etDate"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/rounded_white_edittext"
+            android:clickable="true"
             android:drawableEnd="@drawable/ic_calendar"
             android:drawableTint="#2208DC"
+            android:focusable="false"
             android:fontFamily="@font/poppins_regular"
-            android:hint="DD/MM/YYYY HH:MM"
+            android:hint="DD-MM-AAAA"
             android:inputType="text"
             android:maxLines="1"
             android:paddingEnd="10dp"
@@ -65,7 +73,59 @@
             android:textColor="@android:color/black"
             android:textColorHint="#9E9E9E"
             android:textSize="@dimen/txt_sub_title"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            tools:ignore="RtlSymmetry" />
+        <!--
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
+            android:text="¿Deseas mostrar citas ocupadas?"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_title"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <RadioButton
+                android:id="@+id/rbYes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="Si" />
+
+            <RadioButton
+                android:id="@+id/rbNo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="No" />
+        </LinearLayout>
+        -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
+            android:text="¿A que hora sera tu cita?"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_title"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4" />
 
         <com.ncorti.slidetoact.SlideToActView
             android:id="@+id/sbConfirmation"
