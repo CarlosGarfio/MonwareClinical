@@ -83,10 +83,10 @@ public class HomeFragment extends Fragment implements
         Date date = new Date();
         System.out.println(dateFormat.format(date));
 
-        int myDateInt = Integer.parseInt(dateFormat.format(date).replace("-", ""));
+        final int myDateInt = Integer.parseInt(dateFormat.format(date).replace("-", ""));
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference ref = mDatabase.child(getString(R.string.fb_table_clinic_books));
+        final DatabaseReference ref = mDatabase.child(getString(R.string.fb_table_clinic_books));
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment implements
                     }
                 }
 
-                myBooksAdapter = new MyBooksAdapter(context, books, HomeFragment.this::onSelectedBook);
+                myBooksAdapter = new MyBooksAdapter(context, books, HomeFragment.this);
                 recyclerView.setAdapter(myBooksAdapter);
             }
 

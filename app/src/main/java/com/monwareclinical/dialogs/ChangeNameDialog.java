@@ -41,23 +41,31 @@ public class ChangeNameDialog {
         show = builder.show();
 
         ImageView btnClose = view.findViewById(R.id.txtClose);
-        EditText etName = view.findViewById(R.id.etName);
+        final EditText etName = view.findViewById(R.id.etName);
         Button btnSave = view.findViewById(R.id.btnSave);
 
 
         // Yes
-        btnSave.setOnClickListener(v -> {
-            String txtName = etName.getText().toString();
-            if (TextUtils.isEmpty(txtName.trim())) {
-                etName.setError("Este campo no puede estar vacio");
-                etName.requestFocus();
-                return;
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String txtName = etName.getText().toString();
+                if (TextUtils.isEmpty(txtName.trim())) {
+                    etName.setError("Este campo no puede estar vacio");
+                    etName.requestFocus();
+                    return;
+                }
+                etName.setError(null);
+                listener.getName(txtName);
             }
-            etName.setError(null);
-            listener.getName(txtName);
         });
         // Close
-        btnClose.setOnClickListener(v -> closeDialog());
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDialog();
+            }
+        });
 
     }
 

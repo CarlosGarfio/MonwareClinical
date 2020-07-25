@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -143,19 +144,28 @@ public class ProfileActivity extends AppCompatActivity implements
                 final StorageReference imageRef = mStorageRef.child("profile_photos/" + mUser.getUid());
                 UploadTask uploadTask = imageRef.putFile(data.getData());
 
-                uploadTask.addOnSuccessListener(taskSnapshot -> {
-                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
-                    downloadUrl.addOnSuccessListener(uri -> {
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setPhotoUri(uri)
-                                .build();
+                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                        downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setPhotoUri(uri)
+                                        .build();
 
-                        mUser.updateProfile(profileUpdates)
-                                .addOnCompleteListener(task1 -> {
-                                    Glide.with(fa).load(mUser.getPhotoUrl()).placeholder(R.drawable.blank_user).dontAnimate().into(imgProfile);
-                                    loadingDialog.dismissDialog();
-                                });
-                    });
+                                mUser.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Glide.with(fa).load(mUser.getPhotoUrl()).placeholder(R.drawable.blank_user).dontAnimate().into(imgProfile);
+                                                loadingDialog.dismissDialog();
+                                            }
+                                        });
+                            }
+                        });
+                    }
                 });
                 break;
         }
@@ -171,52 +181,69 @@ public class ProfileActivity extends AppCompatActivity implements
                 .build();
 
         mUser.updateProfile(profileUpdates)
-                .addOnCompleteListener(task1 -> {
-                    loadingDialog.dismissDialog();
-                    initStuff();
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        loadingDialog.dismissDialog();
+                        initStuff();
+                    }
                 });
     }
 
     @Override
-    public void getEmail(String oldEmail, String password, String newEmail) {
+    public void getEmail(String oldEmail, String password, final String newEmail) {
         changeEmailDialog.closeDialog();
         loadingDialog.showDialog();
 
         AuthCredential credential = EmailAuthProvider.getCredential(oldEmail, password);
 
-        mUser.reauthenticate(credential).addOnCompleteListener((OnCompleteListener<Void>) task ->
-        {
-            if (task.isSuccessful())
-                mUser.updateEmail(newEmail).addOnCompleteListener(task1 -> {
+        mUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful())
+                    mUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            loadingDialog.dismissDialog();
+                            if (task.isSuccessful())
+                                initStuff();
+                            else
+                                Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                else {
                     loadingDialog.dismissDialog();
-                    if (task1.isSuccessful()) initStuff();
-                    else Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
-                });
-            else {
-                loadingDialog.dismissDialog();
-                Toast.makeText(fa, "El email o la contraseña son incorrectos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fa, "El email o la contraseña son incorrectos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     @Override
-    public void getPassword(String txtEmail, String txtOldPassword, String txtNewPassword) {
+    public void getPassword(String txtEmail, String txtOldPassword, final String txtNewPassword) {
         changePasswordDialog.closeDialog();
         loadingDialog.showDialog();
 
         AuthCredential credential = EmailAuthProvider.getCredential(txtEmail, txtOldPassword);
 
-        mUser.reauthenticate(credential).addOnCompleteListener((OnCompleteListener<Void>) task ->
-        {
-            if (task.isSuccessful())
-                mUser.updatePassword(txtNewPassword).addOnCompleteListener(task1 -> {
+        mUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful())
+                    mUser.updatePassword(txtNewPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            loadingDialog.dismissDialog();
+                            if (task.isSuccessful()) initStuff();
+                            else
+                                Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                else {
                     loadingDialog.dismissDialog();
-                    if (task1.isSuccessful()) initStuff();
-                    else Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
-                });
-            else {
-                loadingDialog.dismissDialog();
-                Toast.makeText(fa, "El email o la contraseña son incorrectos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fa, "El email o la contraseña son incorrectos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -252,12 +279,15 @@ public class ProfileActivity extends AppCompatActivity implements
      ********************FIREBASE********************
      */
 
-    FirebaseAuth.AuthStateListener mAuthStateListener = firebaseAuth -> {
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user == null) {
-            startActivity(new Intent(fa, SplashScreenActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    FirebaseAuth.AuthStateListener mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user == null) {
+                startActivity(new Intent(fa, SplashScreenActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
         }
     };
 

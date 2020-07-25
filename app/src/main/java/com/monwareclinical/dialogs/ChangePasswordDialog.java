@@ -41,25 +41,33 @@ public class ChangePasswordDialog {
         show = builder.show();
 
         ImageView btnClose = view.findViewById(R.id.txtClose);
-        EditText etEmail = view.findViewById(R.id.etEmail);
-        EditText etOldPassword = view.findViewById(R.id.etOldPassword);
-        EditText etNewPassword = view.findViewById(R.id.etNewPassword);
-        EditText etRepeatNewPassword = view.findViewById(R.id.etRepeatNewPassword);
+        final EditText etEmail = view.findViewById(R.id.etEmail);
+        final EditText etOldPassword = view.findViewById(R.id.etOldPassword);
+        final EditText etNewPassword = view.findViewById(R.id.etNewPassword);
+        final EditText etRepeatNewPassword = view.findViewById(R.id.etRepeatNewPassword);
         Button btnSave = view.findViewById(R.id.btnSave);
 
 
         // Save
-        btnSave.setOnClickListener(v -> {
-            if (isEverythingOk(etEmail, etOldPassword, etNewPassword, etRepeatNewPassword)) {
-                String txtEmail = etEmail.getText().toString();
-                String txtOldPassword = etOldPassword.getText().toString();
-                String txtNewPassword = etNewPassword.getText().toString();
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isEverythingOk(etEmail, etOldPassword, etNewPassword, etRepeatNewPassword)) {
+                    String txtEmail = etEmail.getText().toString();
+                    String txtOldPassword = etOldPassword.getText().toString();
+                    String txtNewPassword = etNewPassword.getText().toString();
 
-                listener.getPassword(txtEmail, txtOldPassword, txtNewPassword);
+                    listener.getPassword(txtEmail, txtOldPassword, txtNewPassword);
+                }
             }
         });
         // Close
-        btnClose.setOnClickListener(v -> closeDialog());
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDialog();
+            }
+        });
 
     }
 

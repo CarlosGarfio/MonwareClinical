@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -106,11 +109,11 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
     }
 
     void loadHours(String selectedDate) throws ParseException {
-        LoadingDialog loadingDialog = new LoadingDialog(fa);
+        final LoadingDialog loadingDialog = new LoadingDialog(fa);
         loadingDialog.showDialog();
         loadingDialog.setText("Cargando, porfavor espera...");
 
-        List<Book> books = new ArrayList<>();
+        final List<Book> books = new ArrayList<>();
 
         Clinic clinic = Constants.getInstance(fa).getClinic();
 
@@ -120,7 +123,7 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
         Date date;
 
         date = sdf.parse(opensAt);
-        Calendar openCalendar = Calendar.getInstance();
+        final Calendar openCalendar = Calendar.getInstance();
         openCalendar.setTime(date);
 
         date = sdf.parse(closesAt);
@@ -202,16 +205,19 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.etDate:
-                DatePickerDialog.OnDateSetListener dateListener = (datePicker, year, month, dayOfMonth) -> {
-                    final int actualMonth = month + 1;
-                    String formattedDay = (dayOfMonth < 10) ? ZERO + dayOfMonth : String.valueOf(dayOfMonth);
-                    String formattedMonth = (actualMonth < 10) ? ZERO + actualMonth : String.valueOf(actualMonth);
-                    String formattedDate = formattedDay + SEPARATOR + formattedMonth + SEPARATOR + year;
-                    etDate.setText(formattedDate);
-                    try {
-                        loadHours(formattedDate);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                        final int actualMonth = month + 1;
+                        String formattedDay = (dayOfMonth < 10) ? ZERO + dayOfMonth : String.valueOf(dayOfMonth);
+                        String formattedMonth = (actualMonth < 10) ? ZERO + actualMonth : String.valueOf(actualMonth);
+                        String formattedDate = formattedDay + SEPARATOR + formattedMonth + SEPARATOR + year;
+                        etDate.setText(formattedDate);
+                        try {
+                            loadHours(formattedDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 };
 
@@ -252,7 +258,7 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
             return;
         }
 
-        LoadingDialog loadingDialog = new LoadingDialog(fa);
+        final LoadingDialog loadingDialog = new LoadingDialog(fa);
         loadingDialog.showDialog();
         loadingDialog.setText("Registrando, porfavor espera...");
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
@@ -268,16 +274,18 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
                 booksAdapter.getSelectedHour().getHour(),
                 Book.TOOK);
 
-        myRef.setValue(book)
-                .addOnCompleteListener(task -> {
-                    loadingDialog.dismissDialog();
-                    if (task.isSuccessful()) {
-                        Toast.makeText(fa, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                        fa.onBackPressed();
-                    } else {
-                        Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        myRef.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                loadingDialog.dismissDialog();
+                if (task.isSuccessful()) {
+                    Toast.makeText(fa, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                    fa.onBackPressed();
+                } else {
+                    Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override

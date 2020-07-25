@@ -85,15 +85,18 @@ public class LoginActivity extends AppCompatActivity implements
         String txtEmail = tilEtEmail.getEditText().getText().toString();
         String txtPassword = tilEtPassword.getEditText().getText().toString();
 
-        mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(fa, task -> {
-            if (task.isSuccessful()) {
-                loadingDialog.dismissDialog();
-                startActivity(new Intent(fa, MenuActivity.class));
-                finish();
-                fa.overridePendingTransition(R.anim.fade_out, R.anim.fade_out);
-            } else {
-                loadingDialog.dismissDialog();
-                Toast.makeText(fa, "El correo o la contraseña son incorrectos", Toast.LENGTH_SHORT).show();
+        mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(fa, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    loadingDialog.dismissDialog();
+                    startActivity(new Intent(fa, MenuActivity.class));
+                    finish();
+                    fa.overridePendingTransition(R.anim.fade_out, R.anim.fade_out);
+                } else {
+                    loadingDialog.dismissDialog();
+                    Toast.makeText(fa, "El correo o la contraseña son incorrectos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

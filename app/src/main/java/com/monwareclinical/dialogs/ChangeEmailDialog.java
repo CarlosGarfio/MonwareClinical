@@ -41,23 +41,31 @@ public class ChangeEmailDialog {
         show = builder.show();
 
         ImageView btnClose = view.findViewById(R.id.txtClose);
-        EditText etOldEmail = view.findViewById(R.id.etOldEmail);
-        EditText etPassword = view.findViewById(R.id.etPassword);
-        EditText etNewEmail = view.findViewById(R.id.etNewEmail);
+        final EditText etOldEmail = view.findViewById(R.id.etOldEmail);
+        final EditText etPassword = view.findViewById(R.id.etPassword);
+        final EditText etNewEmail = view.findViewById(R.id.etNewEmail);
         Button btnSave = view.findViewById(R.id.btnSave);
 
 
         // Save
-        btnSave.setOnClickListener(v -> {
-            if (isEverythingOk(etOldEmail, etPassword, etNewEmail)) {
-                String txtOldEmail = etOldEmail.getText().toString();
-                String txtPassword = etPassword.getText().toString();
-                String txtNewEmail = etNewEmail.getText().toString();
-                listener.getEmail(txtOldEmail, txtPassword, txtNewEmail);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isEverythingOk(etOldEmail, etPassword, etNewEmail)) {
+                    String txtOldEmail = etOldEmail.getText().toString();
+                    String txtPassword = etPassword.getText().toString();
+                    String txtNewEmail = etNewEmail.getText().toString();
+                    listener.getEmail(txtOldEmail, txtPassword, txtNewEmail);
+                }
             }
         });
         // Close
-        btnClose.setOnClickListener(v -> closeDialog());
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDialog();
+            }
+        });
 
     }
 

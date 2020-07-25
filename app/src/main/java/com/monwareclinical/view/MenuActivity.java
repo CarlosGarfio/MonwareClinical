@@ -15,7 +15,9 @@ import com.monwareclinical.R;
 import com.monwareclinical.util.Constants;
 import com.monwareclinical.util.SetUpToolBar;
 
-public class MenuActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MenuActivity extends AppCompatActivity implements
+        BottomNavigationView.OnNavigationItemSelectedListener {
+
     Activity fa;
 
     SetUpToolBar toolBar;
