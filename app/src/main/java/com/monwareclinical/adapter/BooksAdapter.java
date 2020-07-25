@@ -1,33 +1,29 @@
 package com.monwareclinical.adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.monwareclinical.R;
-import com.monwareclinical.model.Hour;
+import com.monwareclinical.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> {
+public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> {
 
     Context context;
-    List<Hour> hours;
-    SelectIconListener listener;
+    List<Book> books;
+    SelectHourListener listener;
 
-    public HoursAdapter(Context context, SelectIconListener listener) {
+    public BooksAdapter(Context context, SelectHourListener listener) {
         this.context = context;
-        hours = new ArrayList<>();
+        books = new ArrayList<>();
         this.listener = listener;
     }
 
@@ -40,19 +36,19 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.txtHour.setText(hours.get(position).getHour());
+        holder.txtHour.setText(books.get(position).getHour());
 
         String txtAvailable;
-        switch (hours.get(position).getState()) {
-            case Hour.TOOK:
+        switch (books.get(position).getState()) {
+            case Book.TOOK:
                 txtAvailable = "Ocupado";
                 holder.txtIsAvailable.setTextColor(context.getColor(R.color.colorUnavailable));
                 break;
-            case Hour.AVAILABLE:
+            case Book.AVAILABLE:
                 txtAvailable = "Disponible";
                 holder.txtIsAvailable.setTextColor(context.getColor(R.color.colorAvailable));
                 break;
-            case Hour.SELECTED:
+            case Book.SELECTED:
                 txtAvailable = "Selecionado";
                 holder.txtIsAvailable.setTextColor(context.getColor(R.color.colorSelected));
                 break;
@@ -65,39 +61,52 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return hours.size();
+        return books.size();
     }
 
-    public void setHours(List<Hour> hours) {
-        this.hours = hours;
+    public void setBooks(List<Book> books) {
+        this.books = books;
         notifyDataSetChanged();
     }
 
-    public Hour getHourByPosition(int position) {
-        return hours.get(position);
+    public Book getBookByPosition(int position) {
+        return books.get(position);
     }
 
     public void selectHour(int position) {
-        hours.get(position).setState(Hour.SELECTED);
+        books.get(position).setState(Book.SELECTED);
         notifyItemChanged(position);
     }
 
     public void cleanSelectedHours() {
-        for (Hour h : hours)
-            if (h.getState() == Hour.SELECTED)
-                h.setState(Hour.AVAILABLE);
+        for (Book b : books)
+            if (b.getState() == Book.SELECTED)
+                b.setState(Book.AVAILABLE);
         notifyDataSetChanged();
     }
 
+    public boolean isHourSelected() {
+        for (Book b : books)
+            if (b.getState() == Book.SELECTED)
+                return true;
+        return false;
+    }
+
+    public Book getSelectedHour() {
+        for (Book b : books)
+            if (b.getState() == Book.SELECTED)
+                return b;
+        return null;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements
             View.OnClickListener {
 
         TextView txtHour;
         TextView txtIsAvailable;
-        SelectIconListener listener;
+        SelectHourListener listener;
 
-        public ViewHolder(View itemView, SelectIconListener onIconClick) {
+        public ViewHolder(View itemView, SelectHourListener onIconClick) {
             super(itemView);
 
             txtHour = itemView.findViewById(R.id.txtHour);
@@ -109,11 +118,11 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            listener.onHourSelected(getAdapterPosition());
+            listener.onSelectedBook(getAdapterPosition());
         }
     }
 
-    public interface SelectIconListener {
-        void onHourSelected(int position);
+    public interface SelectHourListener {
+        void onSelectedBook(int position);
     }
 }

@@ -1,6 +1,5 @@
 package com.monwareclinical.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,13 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.monwareclinical.R;
-import com.monwareclinical.dialogs.LoadingDialog;
 import com.monwareclinical.model.Clinic;
 import com.monwareclinical.util.Constants;
 

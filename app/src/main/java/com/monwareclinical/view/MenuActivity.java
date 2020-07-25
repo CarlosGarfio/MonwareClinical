@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.monwareclinical.R;
+import com.monwareclinical.util.Constants;
 import com.monwareclinical.util.SetUpToolBar;
 
 public class MenuActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -60,7 +61,7 @@ public class MenuActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = HomeFragment.newInstance();
                 break;
             case R.id.navigation_clinic:
-                toolBar.setTitle(getString(R.string.menu_building));
+                toolBar.setTitle(getString(R.string.menu_building) + " " + Constants.getInstance(fa).getClinic().getName());
                 fragment = ClinicFragment.newInstance();
                 break;
             case R.id.navigation_medicines:

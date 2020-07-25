@@ -20,7 +20,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     Activity fa;
 
-    final long MILLS = 500L;
+    final long MILLS = 1_000L;
 
     public static final Object lock = new Object();
     public static int loading = 0;

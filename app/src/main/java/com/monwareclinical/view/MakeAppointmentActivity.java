@@ -22,10 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.monwareclinical.R;
-import com.monwareclinical.adapter.HoursAdapter;
+import com.monwareclinical.adapter.BooksAdapter;
 import com.monwareclinical.dialogs.LoadingDialog;
+import com.monwareclinical.model.Book;
 import com.monwareclinical.model.Clinic;
-import com.monwareclinical.model.Hour;
 import com.monwareclinical.util.Constants;
 import com.monwareclinical.util.SetUpToolBar;
 import com.ncorti.slidetoact.SlideToActView;
@@ -40,8 +40,7 @@ import java.util.List;
 public class MakeAppointmentActivity extends AppCompatActivity implements
         View.OnClickListener,
         SlideToActView.OnSlideCompleteListener,
-        HoursAdapter.SelectIconListener,
-        ValueEventListener {
+        BooksAdapter.SelectHourListener {
 
     final String ZERO = "0";
     final String SEPARATOR = "-";
@@ -56,7 +55,7 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
     EditText etTitle;
     EditText etDate;
     RecyclerView recyclerView;
-    HoursAdapter hoursAdapter;
+    BooksAdapter booksAdapter;
 
     final Calendar c = Calendar.getInstance();
     final int mDay = c.get(Calendar.DAY_OF_MONTH);
@@ -86,51 +85,24 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
     }
 
     void initActions() {
-        etTitle.setOnClickListener(this);
         etDate.setOnClickListener(this);
         slider.setOnSlideCompleteListener(this);
     }
 
     void initStuff() {
         toolBar = new SetUpToolBar(fa, true, "Agendar cita", null);
-        unlockSlider(false);
-//        etDate.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                onStart();
-//            }
-//        });
+        slider.setOuterColor(getColor(R.color.colorSliderUnlocked));
+        slider.setIconColor(getColor(R.color.colorSliderUnlocked));
+        slider.setLocked(false);
     }
 
     void initRecycler() {
-        hoursAdapter = new HoursAdapter(fa, this);
+        booksAdapter = new BooksAdapter(fa, this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView.setAdapter(hoursAdapter);
-    }
-
-    void unlockSlider(boolean bool) {
-        if (bool) {
-            slider.setOuterColor(getColor(R.color.colorSliderUnlocked));
-            slider.setIconColor(getColor(R.color.colorSliderUnlocked));
-            slider.setLocked(false);
-        } else {
-            slider.setOuterColor(getColor(R.color.colorSliderLocked));
-            slider.setIconColor(getColor(R.color.colorSliderLocked));
-            slider.setLocked(true);
-        }
+        recyclerView.setAdapter(booksAdapter);
     }
 
     void loadHours(String selectedDate) throws ParseException {
@@ -138,7 +110,7 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
         loadingDialog.showDialog();
         loadingDialog.setText("Cargando, porfavor espera...");
 
-        List<Hour> hours = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
 
         Clinic clinic = Constants.getInstance(fa).getClinic();
 
@@ -170,10 +142,9 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Hour> hoursTook = new ArrayList<>();
+                List<Book> booksTook = new ArrayList<>();
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    String hour = ds.getValue().toString();
-                    hoursTook.add(new Hour(hour, Hour.TOOK));
+                    booksTook.add(ds.getValue(Book.class));
                 }
 
                 for (int i = 0; i < th; i++) {
@@ -201,19 +172,21 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
 
                     String tmp = h_m + " - " + h_m1;
 
-                    if (isHourTook(hoursTook, tmp)) {
-                        hours.add(new Hour(tmp, Hour.TOOK));
+                    Book book;
+                    if (isHourTook(booksTook, tmp)) {
+                        book = new Book("", "", "", tmp, Book.TOOK);
                     } else {
-                        hours.add(new Hour(tmp, Hour.AVAILABLE));
+                        book = new Book("", "", "", tmp, Book.AVAILABLE);
                     }
+                    books.add(book);
                 }
                 loadingDialog.dismissDialog();
-                hoursAdapter.setHours(hours);
+                booksAdapter.setBooks(books);
             }
 
-            boolean isHourTook(List<Hour> hoursTook, String hour) {
-                for (Hour h : hoursTook)
-                    if (h.getHour().equals(hour))
+            boolean isHourTook(List<Book> booksTook, String hour) {
+                for (Book b : booksTook)
+                    if (b.getHour().equals(hour))
                         return true;
                 return false;
             }
@@ -228,8 +201,6 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.etTitle:
-                break;
             case R.id.etDate:
                 DatePickerDialog.OnDateSetListener dateListener = (datePicker, year, month, dayOfMonth) -> {
                     final int actualMonth = month + 1;
@@ -260,63 +231,73 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
 
     @Override
     public void onSlideComplete(SlideToActView slideToActView) {
-        if (slider.isLocked()) {
+        String title = etTitle.getText().toString();
+        String date = etDate.getText().toString();
+
+        if (TextUtils.isEmpty(title.trim())) {
+            etTitle.setError("Este campo no puede estar vacio");
             slider.resetSlider();
-        } else {
-            // Make Appointment
+            return;
         }
+        etTitle.setError(null);
+
+        if (TextUtils.isEmpty(date.trim())) {
+            Toast.makeText(fa, "Seleciona una fecha", Toast.LENGTH_SHORT).show();
+            slider.resetSlider();
+            return;
+        }
+        if (!booksAdapter.isHourSelected()) {
+            Toast.makeText(fa, "Seleciona una hora", Toast.LENGTH_SHORT).show();
+            slider.resetSlider();
+            return;
+        }
+
+        LoadingDialog loadingDialog = new LoadingDialog(fa);
+        loadingDialog.showDialog();
+        loadingDialog.setText("Registrando, porfavor espera...");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
+                .child(getString(R.string.fb_table_clinic_books))
+                .child(date)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+        Book book = new Book(
+                FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                etTitle.getText().toString(),
+                etDate.getText().toString(),
+                booksAdapter.getSelectedHour().getHour(),
+                Book.TOOK);
+
+        myRef.setValue(book)
+                .addOnCompleteListener(task -> {
+                    loadingDialog.dismissDialog();
+                    if (task.isSuccessful()) {
+                        Toast.makeText(fa, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                        fa.onBackPressed();
+                    } else {
+                        Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
-    public void onHourSelected(int position) {
-        Hour hour = hoursAdapter.getHourByPosition(position);
-        switch (hour.getState()) {
-            case Hour.TOOK:
+    public void onSelectedBook(int position) {
+        Book book = booksAdapter.getBookByPosition(position);
+        switch (book.getState()) {
+            case Book.TOOK:
                 Toast.makeText(fa, "Esa hora se encuentra ocupada", Toast.LENGTH_SHORT).show();
                 break;
-            case Hour.AVAILABLE:
-            case Hour.SELECTED:
-                hoursAdapter.cleanSelectedHours();
-                hoursAdapter.selectHour(position);
+            case Book.AVAILABLE:
+            case Book.SELECTED:
+                booksAdapter.cleanSelectedHours();
+                booksAdapter.selectHour(position);
                 break;
         }
     }
 
-    DatabaseReference mListener;
-
     @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        String date = etDate.getText().toString().trim();
-        if (!TextUtils.isEmpty(date)) {
-            try {
-                loadHours(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
-
-    }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        String date = etDate.getText().toString().trim();
-//        if (!TextUtils.isEmpty(date)) {
-//            mListener = FirebaseDatabase.getInstance()
-//                    .getReference()
-//                    .child(getString(R.string.fb_table_clinic_books))
-//                    .child(etDate.getText().toString());
-//            mListener.addValueEventListener(this);
-//        }
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (mListener != null) mListener.removeEventListener(this);
-//    }
 }
