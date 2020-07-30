@@ -3,7 +3,12 @@ package com.monwareclinical.view;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
@@ -39,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class MakeAppointmentActivity extends AppCompatActivity implements
         View.OnClickListener,
@@ -267,7 +273,7 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
 
-        Book book = new Book(
+        final Book book = new Book(
                 FirebaseAuth.getInstance().getCurrentUser().getUid(),
                 etTitle.getText().toString(),
                 etDate.getText().toString(),

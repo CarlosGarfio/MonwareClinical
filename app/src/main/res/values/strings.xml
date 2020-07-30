@@ -25,6 +25,7 @@
     <string name="fb_table_users">users</string>
     <string name="fb_table_clinic">clinic</string>
     <string name="fb_table_clinic_books">clinic_books</string>
+    <string name="fb_table_clinic_medicines">medicines</string>
     <string name="fb_auth_failed">Error al autenticar</string>
 
     <!-- EDIT PROFILE -->

@@ -12,9 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.monwareclinical.R;
 import com.monwareclinical.util.Constants;
 
-
 import static android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN;
-
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -34,6 +32,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         fa = this;
 
         Constants.getInstance(fa);
+
+
     }
 
     void continueToLogin() {

@@ -125,7 +125,10 @@ public class SignUpActivity extends AppCompatActivity implements
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        System.out.println(task.getException());
                         if (task.isSuccessful()) {
+
+                            tilEtEmail.getEditText().setError(null);
 
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
@@ -148,7 +151,10 @@ public class SignUpActivity extends AppCompatActivity implements
                                         }
                                     });
                         } else {
-                            Toast.makeText(fa, fa.getString(R.string.fb_auth_failed), Toast.LENGTH_SHORT).show();
+                            loadingDialog.dismissDialog();
+                            tilEtEmail.getEditText().setError("El correo ya esta registrado");
+                            tilEtEmail.getEditText().requestFocus();
+//                            Toast.makeText(fa, fa.getString(R.string.fb_auth_failed), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(this, new OnFailureListener() {
