@@ -14,7 +14,6 @@ import com.monwareclinical.model.Book;
 import com.monwareclinical.model.Clinic;
 import com.monwareclinical.util.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.ViewHolder> {

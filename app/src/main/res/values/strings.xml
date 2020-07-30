@@ -36,6 +36,7 @@
     <string name="new_password">Contraseña nueva</string>
     <string name="repeat_new_password">Repetir contraseña nueva</string>
     <string name="full_name">Nombre completo</string>
+    <string name="search">Buscar</string>
 
 
 </resources>

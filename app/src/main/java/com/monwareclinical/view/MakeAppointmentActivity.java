@@ -3,12 +3,7 @@ package com.monwareclinical.view;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
@@ -44,7 +39,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class MakeAppointmentActivity extends AppCompatActivity implements
         View.OnClickListener,

@@ -1,6 +1,5 @@
 package com.monwareclinical.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,10 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.monwareclinical.R;
-import com.monwareclinical.model.Book;
-import com.monwareclinical.model.Clinic;
 import com.monwareclinical.model.Medicine;
-import com.monwareclinical.util.Constants;
 
 import java.util.List;
 
@@ -64,6 +60,11 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
     @Override
     public int getItemCount() {
         return medicines.size();
+    }
+
+    public void setMedicines(List<Medicine> medicines) {
+        this.medicines = medicines;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements
