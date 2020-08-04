@@ -9,6 +9,7 @@ public class Medicine implements Serializable {
 
     String img;
     String name;
+    double price;
     String desc;
     String routeOfAdministration;
     String excretion;
@@ -17,9 +18,10 @@ public class Medicine implements Serializable {
     public Medicine() {
     }
 
-    public Medicine(String img, String name, String desc, String routeOfAdministration, String excretion, int isAvailable) {
+    public Medicine(String img, String name, double price, String desc, String routeOfAdministration, String excretion, int isAvailable) {
         this.img = img;
         this.name = name;
+        this.price = price;
         this.desc = desc;
         this.routeOfAdministration = routeOfAdministration;
         this.excretion = excretion;
@@ -32,6 +34,10 @@ public class Medicine implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public String getDesc() {

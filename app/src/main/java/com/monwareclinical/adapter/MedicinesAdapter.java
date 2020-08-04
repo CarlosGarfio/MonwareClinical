@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.monwareclinical.R;
 import com.monwareclinical.model.Medicine;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.ViewHolder> {
@@ -22,6 +23,7 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
     Context context;
     List<Medicine> medicines;
     SelectMedicineListener listener;
+    final DecimalFormat formatter = new DecimalFormat("#,###.00");
 
     public MedicinesAdapter(Context context, List<Medicine> medicines, SelectMedicineListener listener) {
         this.context = context;
@@ -55,6 +57,15 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
             holder.txtIsAvailable.setTextColor(context.getColor(R.color.colorUnavailable));
             holder.txtIsAvailable.setText("No disponible");
         }
+
+        double price=medicine.getPrice();
+        String txtP;
+        if(position == 0d)
+            txtP="0.00";
+        else
+            txtP=formatter.format(price);
+
+        holder.txtPrice.setText(String.format("$%s", txtP));
     }
 
     @Override
@@ -73,6 +84,7 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
         ImageView imgPhoto;
         TextView txtName;
         TextView txtDesc;
+        TextView txtPrice;
         TextView txtIsAvailable;
 
         SelectMedicineListener listener;
@@ -83,6 +95,7 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
             imgPhoto = itemView.findViewById(R.id.imgPhoto);
             txtName = itemView.findViewById(R.id.txtName);
             txtDesc = itemView.findViewById(R.id.txtDescription);
+            txtPrice=itemView.findViewById(R.id.txtPrice);
             txtIsAvailable = itemView.findViewById(R.id.txtIsAvailable);
 
             this.listener = listener;

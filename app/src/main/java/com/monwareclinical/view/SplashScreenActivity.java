@@ -32,8 +32,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         fa = this;
 
         Constants.getInstance(fa);
-
-
     }
 
     void continueToLogin() {

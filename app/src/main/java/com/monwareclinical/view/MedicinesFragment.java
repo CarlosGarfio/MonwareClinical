@@ -30,6 +30,7 @@ import com.monwareclinical.adapter.MedicinesAdapter;
 import com.monwareclinical.model.Medicine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MedicinesFragment extends Fragment implements
