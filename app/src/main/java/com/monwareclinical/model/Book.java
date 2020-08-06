@@ -11,16 +11,20 @@ public class Book {
     String date;
     String hour;
     int state;
+    String drImg;
+    String drName;
 
     public Book() {
     }
 
-    public Book(String userID, String title, String date, String hour, int state) {
+    public Book(String userID, String title, String date, String hour, int state, String drImg, String drName) {
         this.userID = userID;
         this.title = title;
         this.date = date;
         this.hour = hour;
         this.state = state;
+        this.drImg = drImg;
+        this.drName = drName;
     }
 
     public String getUserID() {
@@ -47,14 +51,11 @@ public class Book {
         this.state = state;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "userID='" + userID + '\'' +
-                ", title='" + title + '\'' +
-                ", date='" + date + '\'' +
-                ", hour='" + hour + '\'' +
-                ", state=" + state +
-                '}';
+    public String getDrImg() {
+        return drImg;
+    }
+
+    public String getDrName() {
+        return drName;
     }
 }

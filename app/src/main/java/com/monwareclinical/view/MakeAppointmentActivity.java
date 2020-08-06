@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,9 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.monwareclinical.R;
 import com.monwareclinical.adapter.BooksAdapter;
+import com.monwareclinical.adapter.DoctorsAdapter;
 import com.monwareclinical.dialogs.LoadingDialog;
 import com.monwareclinical.model.Book;
 import com.monwareclinical.model.Clinic;
+import com.monwareclinical.model.Doctor;
 import com.monwareclinical.util.Constants;
 import com.monwareclinical.util.SetUpToolBar;
 import com.ncorti.slidetoact.SlideToActView;
@@ -57,6 +60,8 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
 
     EditText etTitle;
     EditText etDate;
+    RecyclerView recyclerViewDoctors;
+    DoctorsAdapter doctorsAdapter;
     RecyclerView recyclerView;
     BooksAdapter booksAdapter;
 
@@ -73,6 +78,7 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
         initComps();
         initActions();
         initStuff();
+        initDoctorsRecycler();
         initRecycler();
     }
 
@@ -83,6 +89,7 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
         etTitle = findViewById(R.id.etTitle);
         etDate = findViewById(R.id.etDate);
         recyclerView = findViewById(R.id.recyclerView);
+        recyclerViewDoctors = findViewById(R.id.recyclerViewDoctors);
 
         slider = findViewById(R.id.sbConfirmation);
     }
@@ -97,6 +104,32 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
         slider.setOuterColor(getColor(R.color.colorSliderUnlocked));
         slider.setIconColor(getColor(R.color.colorSliderUnlocked));
         slider.setLocked(false);
+    }
+
+    void initDoctorsRecycler() {
+        final List<Doctor> doctors = new ArrayList<>();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(fa, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewDoctors.setLayoutManager(linearLayoutManager);
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = mDatabase.child(getString(R.string.fb_table_doctors));
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    doctors.add(ds.getValue(Doctor.class));
+                }
+                doctorsAdapter = new DoctorsAdapter(fa, doctors);
+                recyclerViewDoctors.setAdapter(doctorsAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     void initRecycler() {
@@ -177,9 +210,9 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
 
                     Book book;
                     if (isHourTook(booksTook, tmp)) {
-                        book = new Book("", "", "", tmp, Book.TOOK);
+                        book = new Book("", "", "", tmp, Book.TOOK, "", "");
                     } else {
-                        book = new Book("", "", "", tmp, Book.AVAILABLE);
+                        book = new Book("", "", "", tmp, Book.AVAILABLE, "", "");
                     }
                     books.add(book);
                 }
@@ -238,7 +271,7 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
     @Override
     public void onSlideComplete(SlideToActView slideToActView) {
         String title = etTitle.getText().toString();
-        String date = etDate.getText().toString();
+        final String date = etDate.getText().toString();
 
         if (TextUtils.isEmpty(title.trim())) {
             etTitle.setError("Este campo no puede estar vacio");
@@ -263,29 +296,53 @@ public class MakeAppointmentActivity extends AppCompatActivity implements
         loadingDialog.setText("Registrando, porfavor espera...");
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
                 .child(getString(R.string.fb_table_clinic_books))
-                .child(date)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                .child(date);
 
-
-        final Book book = new Book(
-                FirebaseAuth.getInstance().getCurrentUser().getUid(),
-                etTitle.getText().toString(),
-                etDate.getText().toString(),
-                booksAdapter.getSelectedHour().getHour(),
-                Book.TOOK);
-
-        myRef.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                loadingDialog.dismissDialog();
-                if (task.isSuccessful()) {
-                    Toast.makeText(fa, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                    fa.onBackPressed();
-                } else {
-                    Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int maxID = 0;
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.getKey() != null)
+                        if (Integer.parseInt(ds.getKey()) > maxID)
+                            maxID = Integer.parseInt(ds.getKey());
                 }
+                maxID++;
+
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
+                        .child(getString(R.string.fb_table_clinic_books))
+                        .child(date)
+                        .child(String.valueOf(maxID));
+
+                final Book book = new Book(
+                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                        etTitle.getText().toString(),
+                        etDate.getText().toString(),
+                        booksAdapter.getSelectedHour().getHour(),
+                        Book.TOOK,
+                        doctorsAdapter.getDrImg(),
+                        doctorsAdapter.getDrName());
+
+                myRef.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        loadingDialog.dismissDialog();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(fa, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                            fa.onBackPressed();
+                        } else {
+                            Toast.makeText(fa, "Intenta nuevamente", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
     }
 
     @Override

@@ -9,12 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.monwareclinical.R;
 import com.monwareclinical.model.Book;
 import com.monwareclinical.model.Clinic;
 import com.monwareclinical.util.Constants;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.ViewHolder> {
 
@@ -48,6 +51,9 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.ViewHold
 //                clinic.getStreetAddress() + " #" + clinic.getExtNumber() + "\n" +
 //                clinic.getState() + ", " + clinic.getCity() + "\n\n";
 
+
+        Glide.with(context).load(book.getDrImg()).placeholder(R.drawable.blank_user).dontAnimate().into(holder.imgDrProfile);
+        holder.txtDrName.setText(book.getDrName());
         holder.txtTitle.setText(book.getTitle());
         holder.txtDate.setText(book.getDate());
         holder.txtHour.setText(book.getHour());
@@ -62,6 +68,8 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder implements
             View.OnClickListener {
 
+        CircleImageView imgDrProfile;
+        TextView txtDrName;
         TextView txtTitle;
         TextView txtDate;
         TextView txtHour;
@@ -72,6 +80,8 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.ViewHold
         public ViewHolder(View itemView, SelectBookListener listener) {
             super(itemView);
 
+            imgDrProfile = itemView.findViewById(R.id.imgDrProfile);
+            txtDrName = itemView.findViewById(R.id.txtDrName);
             txtTitle = itemView.findViewById(R.id.txtTitle);
             txtDate = itemView.findViewById(R.id.txtDate);
             txtHour = itemView.findViewById(R.id.txtHour);

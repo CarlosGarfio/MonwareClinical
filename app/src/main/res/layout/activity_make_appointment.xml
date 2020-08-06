@@ -49,6 +49,23 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center_vertical"
+            android:text="Seleciona un doctor"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_title"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewDoctors"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
             android:text="¿Que día sera tu cita?"
             android:textColor="@android:color/black"
             android:textSize="@dimen/txt_title"
@@ -125,7 +142,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4" />
+            android:layout_weight="3" />
 
         <com.ncorti.slidetoact.SlideToActView
             android:id="@+id/sbConfirmation"

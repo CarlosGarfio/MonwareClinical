@@ -113,5 +113,52 @@
                 android:textSize="@dimen/txt_title"
                 android:textStyle="normal" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
+            android:text="El Dr te atendera:"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_title"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgDrProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="1dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtDrName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_vertical"
+                android:text="Dr Name"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txt_title"
+                android:textStyle="normal" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
